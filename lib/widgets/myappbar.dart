@@ -12,12 +12,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
         icon: Icon(Icons.menu),
       ),
-      title: Text("Dust On Books"),
+      title: Text("KFC"),
       centerTitle: true,
     );
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
