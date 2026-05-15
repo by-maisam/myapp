@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/utils/colors.dart';
+import 'package:myapp/utils/dimensions.dart';
 import 'package:myapp/utils/images.dart';
 
 class MainPage extends StatefulWidget {
@@ -29,17 +31,43 @@ class _MainPageState extends State<MainPage> {
             options: CarouselOptions(
               aspectRatio: 24 / 9,
               viewportFraction: 1.0,
-
               enableInfiniteScroll: true,
-
               autoPlay: true,
               autoPlayInterval: Duration(seconds: 3),
               autoPlayAnimationDuration: Duration(milliseconds: 800),
               autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              enlargeFactor: 0.3,
-
               scrollDirection: Axis.horizontal,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(Dimensions.paddingMeidum),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          "Explore Menu",
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        SizedBox(
+                          width: 60,
+                          child: Divider(
+                            color: AppColors.brandcolor,
+                            thickness: 2,
+                            radius: BorderRadius.circular(
+                              Dimensions.borderRadiusSmall,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],
