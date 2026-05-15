@@ -1,8 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/utils/colors.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:myapp/utils/dimensions.dart';
 import 'package:myapp/utils/images.dart';
+import 'package:myapp/utils/spacing.dart';
+import 'package:myapp/widgets/Brandunderline.dart';
+import 'package:myapp/utils/data.dart';
+import 'package:myapp/utils/dimensions.dart';
+import 'package:myapp/utils/colors.dart';
+import 'package:dotted_border/dotted_border.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -53,19 +59,58 @@ class _MainPageState extends State<MainPage> {
                           "Explore Menu",
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
-                        SizedBox(
-                          width: 60,
-                          child: Divider(
-                            color: AppColors.brandcolor,
-                            thickness: 2,
-                            radius: BorderRadius.circular(
-                              Dimensions.borderRadiusSmall,
-                            ),
-                          ),
-                        ),
+                        BrandUnderline(),
                       ],
                     ),
+                    Spacer(),
+                    TextButton(onPressed: () {}, child: Text("View All ")),
                   ],
+                ),
+                Spacing.smallY,
+                StaggeredGrid.count(
+                  crossAxisCount: 3,
+                  children: menuCategories.map((item) {
+                    return StaggeredGridTile.count(
+                      crossAxisCellCount: 1,
+                      mainAxisCellCount: menuCategories.indexOf(item) == 0
+                          ? 2
+                          : 1,
+
+                      child: DottedBorder(
+                        options: RoundedRectDottedBorderOptions(
+                          radius: Radius.circular(Dimensions.borderRadiusSmall),
+                          padding: EdgeInsets.all(Dimensions.paddingSmall),
+                          dashPattern: [8, 3],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item['name']!,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            Expanded(child: Image.asset(item["image"]!)),
+                          ],
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                Spacing.mediumY,
+                Text("Best Sellers"),
+                BrandUnderline(),
+                Spacing.smallY,
+                SizedBox(
+                  height: 200,
+                  child: ListView(scrollDirection: Axis.horizontal),
+                ),
+                Spacing.mediumY,
+                Text("Top Sellers"),
+                BrandUnderline(),
+                Spacing.smallY,
+                SizedBox(
+                  height: 200,
+                  child: ListView(scrollDirection: Axis.horizontal),
                 ),
               ],
             ),
