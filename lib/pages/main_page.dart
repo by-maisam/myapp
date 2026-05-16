@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:myapp/pages/menu_page.dart';
 import 'package:myapp/utils/colors.dart';
 import 'package:myapp/utils/dimensions.dart';
 import 'package:myapp/utils/images.dart';
@@ -66,7 +67,13 @@ class _MainPageState extends State<MainPage> {
                     Column(
                       children: [
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MenuPage(),
+                              ),
+                            );
+                          },
                           child: const Text("View All "),
                         ),
                         BrandUnderline(),
