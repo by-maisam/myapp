@@ -3,9 +3,9 @@ class Dimensions {
   static const double paddingMeidum = 16.0;
   static const double paddingLarge = 24.0;
 
-  static const double MarginSmall = 8.0;
-  static const double MarginMeidum = 16.0;
-  static const double MarginLarge = 24.0;
+  static const double marginSmall = 8.0;
+  static const double marginMeidum = 16.0;
+  static const double marginLarge = 24.0;
 
   static const double borderRadiusSmall = 8.0;
   static const double borderRadiusMeidum = 16.0;

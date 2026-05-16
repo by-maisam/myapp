@@ -1,13 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:myapp/utils/colors.dart';
 import 'package:myapp/utils/dimensions.dart';
 import 'package:myapp/utils/images.dart';
 import 'package:myapp/utils/spacing.dart';
 import 'package:myapp/widgets/Brandunderline.dart';
 import 'package:myapp/utils/data.dart';
-import 'package:myapp/utils/dimensions.dart';
-import 'package:myapp/utils/colors.dart';
 import 'package:dotted_border/dotted_border.dart';
 
 class MainPage extends StatefulWidget {
@@ -63,7 +62,12 @@ class _MainPageState extends State<MainPage> {
                       ],
                     ),
                     Spacer(),
-                    TextButton(onPressed: () {}, child: Text("View All ")),
+                    Column(
+                      children: [
+                        TextButton(onPressed: () {}, child: Text("View All ")),
+                        BrandUnderline(),
+                      ],
+                    ),
                   ],
                 ),
                 Spacing.smallY,
@@ -101,8 +105,80 @@ class _MainPageState extends State<MainPage> {
                 BrandUnderline(),
                 Spacing.smallY,
                 SizedBox(
-                  height: 200,
-                  child: ListView(scrollDirection: Axis.horizontal),
+                  height: 240,
+                  width: 200,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: bestSellers.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                color: AppColors.brandcolor,
+                                width: 20,
+                                height: 30,
+                              ),
+                              Container(
+                                color: AppColors.brandcolor,
+                                width: 20,
+                                height: 30,
+                              ),
+                              Container(
+                                color: AppColors.brandcolor,
+                                width: 20,
+                                height: 30,
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: Dimensions.paddingSmall,
+                              vertical: Dimensions.paddingSmall * 0.6,
+                            ),
+                            child: Card(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    bestSellers[index]["name"]!,
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodyLarge,
+                                  ),
+                                  Spacing.mediumY,
+                                  Align(
+                                    alignment: AlignmentGeometry.centerRight,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                          Dimensions.borderRadiusSmall,
+                                        ),
+
+                                        color: AppColors.brandcolor,
+                                      ),
+                                      child: Text(
+                                        " Rs. ${bestSellers[index]["price"]!} ",
+                                        style: TextStyle(
+                                          color: AppColors.buttonTextColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  Expanded(
+                                    child: Image.asset(
+                                      bestSellers[index]["image"]!,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
                 Spacing.mediumY,
                 Text("Top Sellers"),
