@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:myapp/pages/menu_page.dart';
+import 'package:myapp/utils/cart_provider.dart';
 import 'package:myapp/utils/colors.dart';
 import 'package:myapp/utils/dimensions.dart';
 import 'package:myapp/utils/images.dart';
@@ -9,6 +10,7 @@ import 'package:myapp/utils/spacing.dart';
 import 'package:myapp/widgets/Brandunderline.dart';
 import 'package:myapp/utils/data.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -246,18 +248,21 @@ class _MainPageState extends State<MainPage> {
                                           MainAxisAlignment.center,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Icon(
-                                          Icons.add,
-                                          color: AppColors.buttonTextColor,
-                                          size: 18,
-                                        ),
-                                        const SizedBox(width: 6),
-                                        Text(
-                                          "ADD TO BUCKET",
-                                          style: TextStyle(
-                                            color: AppColors.buttonTextColor,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12,
+                                        FilledButton.icon(
+                                          onPressed: () {
+                                            // EXACT FIX: Changed allProducts[index] to bestSellers[index] and added listen: false
+                                            Provider.of<CartProvider>(
+                                              context,
+                                              listen: false,
+                                            ).addItem(bestSellers[index]);
+                                          },
+                                          icon: const Icon(Icons.add, size: 18),
+                                          label: const Text(
+                                            "ADD TO BUCKET",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12,
+                                            ),
                                           ),
                                         ),
                                       ],

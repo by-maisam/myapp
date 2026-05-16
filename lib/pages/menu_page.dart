@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/utils/cart_provider.dart';
 import 'package:myapp/utils/colors.dart';
 import 'package:myapp/utils/data.dart';
 import 'package:myapp/utils/dimensions.dart';
 import 'package:myapp/utils/spacing.dart';
 import 'package:myapp/widgets/myappbar.dart';
+import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class MenuPage extends StatefulWidget {
@@ -186,7 +188,11 @@ class _MenuPageState extends State<MenuPage> {
                                           fontSize: 11,
                                         ),
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Provider.of<CartProvider>(
+                                          context,
+                                        ).addItem(product);
+                                      },
                                       icon: Icon(Icons.add),
                                     ),
                                   ),

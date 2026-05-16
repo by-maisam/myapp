@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/pages/cart_page.dart';
+import 'package:myapp/utils/cart_provider.dart';
 import 'package:myapp/utils/colors.dart';
 import 'package:myapp/utils/images.dart';
+import 'package:provider/provider.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyAppBar({super.key});
@@ -41,7 +44,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (context) => CartPage()));
+          },
           icon: SizedBox(
             width: 40,
             child: Stack(
@@ -50,7 +57,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Center(
                   child: FittedBox(
                     child: Text(
-                      "0",
+                      Provider.of<CartProvider>(
+                        context,
+                      ).getCartCount().toString(),
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         fontSize: 14,
                         color: AppColors.LightTextColor,
