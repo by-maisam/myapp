@@ -27,7 +27,6 @@ class _MainPageState extends State<MainPage> {
     Images.bannerSnackBucket,
     Images.bannerZingerWings,
   ];
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

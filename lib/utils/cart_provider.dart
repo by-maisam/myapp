@@ -1,34 +1,27 @@
 import 'package:flutter/material.dart';
 
 class CartProvider extends ChangeNotifier {
-  // Internal list storing items currently in the shopping cart bucket
   final List<Map<String, dynamic>> _cartList = [];
 
-  /// Retrieves the active list of items added to the cart
   List<Map<String, dynamic>> getCartList() {
     return _cartList;
   }
 
-  /// Adds a product item to the basket or increments its count if it exists
   void addItem(Map<String, dynamic> item) {
-    // Check if the product configuration is already present in the cart array
     int itemIndex = _cartList.lastIndexWhere(
       (element) => element['name'] == item['name'],
     );
 
     if (itemIndex == -1) {
-      // Create a clean, independent map copy to avoid editing global data models
       Map<String, dynamic> mutableItem = Map<String, dynamic>.from(item);
-      mutableItem['quantity'] = 1; // Stored natively as an integer type
+      mutableItem['quantity'] = 1;
       _cartList.add(mutableItem);
       notifyListeners();
     } else {
-      // If the product is already in the list, simply scale its count up
       incrementQuantity(itemIndex);
     }
   }
 
-  /// Direct removal of a product slot position from the tracking queue
   void deleteItem(int index) {
     if (index >= 0 && index < _cartList.length) {
       _cartList.removeAt(index);
@@ -36,7 +29,6 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
-  /// Increments product quantity up to a max restriction boundary threshold of 10
   void incrementQuantity(int index) {
     int currentQuantity = _cartList[index]['quantity'] as int;
     if (currentQuantity < 10) {
